@@ -1,49 +1,84 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { ActivityIndicator, FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { getUsers } from "./api/posts";
-import { View, Text, ActivityIndicator, FlatList, SafeAreaView } from "react-native";
+import ErrorComponent from "./components/Error/Error";
+import PostStructure from "./components/PostStructure/PostStructure";
 
 export default function Content() {
-    const { data, isLoading, isError, error, isFetching, refetch } = useQuery({
+    const { data, isLoading, error, isFetching, refetch } = useQuery({
         queryKey: ["users"],
         queryFn: getUsers,
     });
 
     if (isLoading) return <ActivityIndicator size={"large"} />;
 
-    if (isError) {
+    if (error) {
         return (
-            <View>
-                <Text>Error ao buscar os dados</Text>
-                <Text>Mensagem de erro:</Text> {/*{error.message} */}
-            </View>
+            <ErrorComponent error={error} />
         );
     }
 
     return (
-        <SafeAreaView>
-        <Text style={{textAlign:"center", fontWeight: "bold", marginBottom: 4,}} >LISTA DE USUÁRIOS</Text>
-  
-        <FlatList
-          data={data}
-          refreshing={isFetching}
-          onRefresh={refetch}
-          renderItem={({ item }) => (
-            <View>
-              <View>
-                <Text>
-                  <Text style={{ fontWeight: 'bold' }}>Nome:</Text> {item.name}
-                </Text>
-              </View>
-              <Text>
-                <Text style={{ fontWeight: 'bold' }}>Email:</Text> {item.email}
-              </Text>
-              <Text>
-                <Text style={{ fontWeight: 'bold' }}>Cidade:</Text> {item.address.city}
-              </Text>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.headerContainer}>
+                <Text style={styles.headerTitle}>User List</Text>
+                <View style={styles.headerUnderline} />
             </View>
-        )}
-        />
-      </SafeAreaView>
+
+            <FlatList
+                style={styles.flatList}
+                contentContainerStyle={styles.flatListContent}
+                data={data}
+                refreshing={isFetching}
+                onRefresh={refetch}
+                renderItem={({ item }) => <PostStructure item={item} />}
+                showsVerticalScrollIndicator={false}
+            />
+        </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#f5f7fa",
+    },
+    headerContainer: {
+        alignItems: "center",
+        paddingTop: 30,
+        paddingBottom: 16,
+        paddingHorizontal: 16,
+        backgroundColor: "#ffffff",
+        shadowColor: "#4a69bd",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
+        elevation: 3,
+        marginBottom: 8,
+    },
+    headerTitle: {
+        fontSize: 22,
+        fontWeight: "800",
+        color: "#4a69bd",
+        letterSpacing: 1.2,
+        textAlign: "center",
+    },
+    headerUnderline: {
+        width: 80,
+        height: 4,
+        backgroundColor: "#4a69bd",
+        borderRadius: 2,
+        marginTop: 8,
+    },
+    flatList: {
+        flex: 1,
+    },
+    flatListContent: {
+        paddingVertical: 8,
+        paddingBottom: 20,
+    },
+});
