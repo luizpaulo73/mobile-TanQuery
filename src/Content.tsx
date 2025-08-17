@@ -12,10 +12,7 @@ export default function Content() {
     });
 
     if (isLoading) return <Loading />;
-
-    if (error) {
-        return <ErrorComponent error={error} />;
-    }
+    if (error) return <ErrorComponent error={error} />;
 
     return <UserList data={data} isFetching={isFetching} refetch={refetch} />;
 }
