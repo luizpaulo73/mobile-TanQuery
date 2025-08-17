@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, SafeAreaView, View, StyleSheet, Text } from "react-native";
-import PostStructure from "../PostStructure/PostStructure";
+import UserStructure from "../UserStructure/UserStructure";
 import { User } from "../../types/user";
 
 interface UserListProps {
@@ -22,7 +22,7 @@ export default function UserList({ data, isFetching, refetch }: UserListProps ) 
                 data={data}
                 refreshing={isFetching}
                 onRefresh={refetch}
-                renderItem={({ item }) => <PostStructure item={item} />}
+                renderItem={({ item }) => <UserStructure item={item} />}
             />
         </SafeAreaView>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-interface PostStructureProps {
+interface UserStructureProps {
     name: string;
     email: string;
     address: {
@@ -10,7 +10,7 @@ interface PostStructureProps {
     };
 }
 
-export default function PostStructure({ item }: { item: PostStructureProps }) {
+export default function UserStructure({ item }: { item: UserStructureProps }) {
     return (
         <View style={styles.cardContainer}>
             <View style={styles.cardHeader}>

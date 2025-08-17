@@ -6,13 +6,13 @@ const ErrorComponent = ({ error }: { error: Error | null }) => {
         <View style={styles.container}>
             <View style={styles.errorCard}>
                 <Text style={styles.errorTitle}>
-                    Error ao buscar os dados
+                    Error to display users
                 </Text>
 
                 <View>
                     <Text style={styles.messageText}>
                         {error?.message ||
-                            "Erro desconhecido. Tente novamente mais tarde."}
+                            "Unknown error occurred. Please try again later."}
                     </Text>
                 </View>
             </View>

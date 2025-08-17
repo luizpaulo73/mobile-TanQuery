@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { getUsers } from "./api/posts";
+import { getUsers } from "./api/users";
 import ErrorComponent from "./components/Error/Error";
 import Loading from "./components/Loading/Loading";
 import UserList from "./components/UserList/UserList";
