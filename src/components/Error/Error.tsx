@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         color: "#495057",
         lineHeight: 20,
         fontStyle: "italic",
+        textAlign: "center",
     },
 });
 
