@@ -1,30 +1,7 @@
 import React from "react";
 import { FlatList, SafeAreaView, View, StyleSheet, Text } from "react-native";
 import PostStructure from "../PostStructure/PostStructure";
-
-interface User {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    address: {
-        street: string;
-        suite: string;
-        city: string;
-        zipcode: string;
-        geo: {
-            lat: string;
-            lng: string;
-        };
-    };
-    phone: string;
-    website: string;
-    company: {
-        name: string;
-        catchPhrase: string;
-        bs: string;
-    };
-}
+import { User } from "../../types/user";
 
 interface UserListProps {
     data: User[];
